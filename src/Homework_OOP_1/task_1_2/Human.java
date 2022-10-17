@@ -1,10 +1,14 @@
 package Homework_OOP_1.task_1_2;
 
+import java.util.Objects;
+
 public class Human {
-    private int yearOfBirth;
-    private String name;
-    private String town;
-     private String job;
+    private final int yearOfBirth;
+    private final String name;
+    private final String town;
+     private final String job;
+
+     int currentYear = 2022;
 
     public Human(int yearOfBirth, String name, String town, String job) {
 
@@ -13,26 +17,14 @@ public class Human {
         } else {
             this.yearOfBirth = Math.abs(yearOfBirth);
         }
-        if (name == null) {
-            this.name = "Информация не указана";
-        } else {
-            this.name = name;
-        }
-        if (town == null) {
-            this.town = "Информация не указана";
-        } else {
-            this.town = town;
-        }
-        if (job == null) {
-            this.job = "Информация не указана";
-        } else {
-            this.job = job;
-        }
+        this.name = Objects.requireNonNullElse(name, "Информация не указана");
+        this.town = Objects.requireNonNullElse(town, "Информация не указана");
+        this.job = Objects.requireNonNullElse(job, "Информация не указана");
     }
 
     void talk () {
         System.out.println("Привет! Меня зовут " + name + ". Я из города " + town +
-                ". Я родился в " + yearOfBirth + " году. Я работаю на должности: " + job + ". Будем знакомы!");
+                ". Я родился в " + (currentYear - yearOfBirth) + " году. Я работаю на должности: " + job + ". Будем знакомы!");
     }
 
 }

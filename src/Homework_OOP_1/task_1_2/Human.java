@@ -1,3 +1,5 @@
+package Homework_OOP_1.task_1_2;
+
 public class Human {
     private int yearOfBirth;
     private String name;

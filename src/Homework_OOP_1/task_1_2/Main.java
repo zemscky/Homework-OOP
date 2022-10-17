@@ -1,3 +1,5 @@
+package Homework_OOP_1.task_1_2;
+
 public class Main {
     public static void main(String[] args) {
         Human maksim = new Human(35,"Максим", "Минск","Бренд-менеджера");

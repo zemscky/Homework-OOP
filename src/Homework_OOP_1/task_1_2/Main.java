@@ -6,10 +6,12 @@ public class Main {
         Human anna = new Human(29, "Аня", "Москва", "Методиста");
         Human katia = new Human(28, "Катя", "Калининград", "Продакт-менеджера");
         Human artem = new Human(27, "Артем", "Москва", "Директора по развитию бизнеса");
+        Human vladimir = new Human(21,"Владимир", "Казань", null);
 
         maksim.talk();
         anna.talk();
         katia.talk();
         artem.talk();
+        vladimir.talk();
     }
 }

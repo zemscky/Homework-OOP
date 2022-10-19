@@ -1,37 +1,38 @@
 package Homework_OOP_1.task_1_2;
 
+import java.time.LocalDate;
 import java.util.Objects;
+
 
 public class Human {
     private int yearOfBirth;
-    String name;
+    public String name;
     private String town;
-    String job;
-
-     int currentYear = 2022;
+    public String job;
 
     public Human(int yearOfBirth, String name, String town, String job) {
-
-        this.yearOfBirth = yearOfBirth;
+        if (yearOfBirth < 0 || town.isEmpty() || town.isBlank()) {
+            this.yearOfBirth = 0;
+        } else {
+            this.yearOfBirth = yearOfBirth;
+        }
         this.name = Objects.requireNonNullElse(name, "Информация не указана");
-        this.town = town;
+        if (town != null && !town.isEmpty() && !town.isBlank()) {
+            this.town = town;
+        }else {
+            this.town = "Информация не указана";
+        }
         this.job = Objects.requireNonNullElse(job, "Информация не указана");
-    }
-
-    void talk () {
-        System.out.println("Привет! Меня зовут " + name + ". Я из города " + town +
-                ". Я родился в " + (currentYear - yearOfBirth) + " году. Я работаю на должности: " + job + ". Будем знакомы!");
     }
 
     public int getYearOfBirth() {
         return yearOfBirth;
     }
-
-    public void setYearOfBirth(Integer yearOfBirth) {
-        if (yearOfBirth >= 0 && yearOfBirth != null) {
-            this.yearOfBirth = yearOfBirth;
-        } else {
+    public void setYearOfBirth(int yearOfBirth) {
+        if (yearOfBirth < 0) {
             this.yearOfBirth = 0;
+        } else {
+            this.yearOfBirth = yearOfBirth;
         }
     }
 
@@ -46,4 +47,6 @@ public class Human {
             this.town = "Информация не указана";
         }
     }
+
+
 }

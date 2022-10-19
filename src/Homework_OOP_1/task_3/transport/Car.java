@@ -15,6 +15,7 @@ public class Car {
     private String regNumber;
     private final int seatsCount;
     private boolean summerTyres;
+    private Key key;
 
     public Car(String brand,
                String model,
@@ -26,7 +27,8 @@ public class Car {
                String typeOfBody,
                String regNumber,
                int seatsCount,
-               boolean summerTyres) {
+               boolean summerTyres,
+               Key key) {
 
         this.brand = Objects.requireNonNullElse(brand, "default");
         this.model = Objects.requireNonNullElse(model, "default");
@@ -39,6 +41,11 @@ public class Car {
         this.typeOfBody = Objects.requireNonNullElse(typeOfBody, "седан");
         this.seatsCount = seatsCount;
         this.summerTyres = summerTyres;
+        if(key == null) {
+            this.key = new Key();
+        }else {
+            this.key = key;
+        }
     }
 
     public Car(String brand,
@@ -59,7 +66,8 @@ public class Car {
                 "седан",
                 "x000xx000",
                 5,
-                true
+                true,
+                new Key()
         );
     }
 
@@ -85,9 +93,9 @@ public class Car {
     }
 
     public void setGears(String gears) {
-        if (gears == null){
+        if (gears == null) {
             this.gears = "МКПП";
-        }else {
+        } else {
             this.gears = gears;
         }
 
@@ -98,9 +106,9 @@ public class Car {
     }
 
     public void setRegNumber(String regNumber) {
-        if (regNumber == null){
+        if (regNumber == null) {
             this.regNumber = "x000xx000";
-        }else {
+        } else {
             this.regNumber = regNumber;
         }
     }
@@ -137,20 +145,51 @@ public class Car {
         return seatsCount;
     }
 
-    public void changeTyres () {
+    public void changeTyres() {
         summerTyres = !summerTyres;
     }
 
-    public boolean isCorrectRegNumber () {
-        if (regNumber.length()!=9) {
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
+    }
+
+    public boolean isCorrectRegNumber() {
+        if (regNumber.length() != 9) {
             return false;
         }
         char[] chars = regNumber.toCharArray();
-        if(!Character.isAlphabetic(chars[0]) || !Character.isAlphabetic(chars[4]) || !Character.isAlphabetic(chars[5])) {
+        if (!Character.isAlphabetic(chars[0]) || !Character.isAlphabetic(chars[4]) || !Character.isAlphabetic(chars[5])) {
             return false;
         }
         return Character.isDigit(chars[1]) && Character.isDigit(chars[2]) && Character.isDigit(chars[3]) &&
                 Character.isDigit(chars[6]) && Character.isDigit(chars[7]) && Character.isDigit(chars[8]);
     }
-}
 
+    public static class Key {
+
+        private final boolean remoteRunEngine;
+        private final boolean withoutKeyAccess;
+
+        public Key(boolean remoteRunEngine, boolean withoutKeyAccess) {
+            this.remoteRunEngine = remoteRunEngine;
+            this.withoutKeyAccess = withoutKeyAccess;
+        }
+
+        public Key() {
+            this(false, false);
+        }
+
+        public boolean isRemoteRunEngine() {
+            return remoteRunEngine;
+        }
+
+        public boolean isWithoutKeyAccess() {
+            return withoutKeyAccess;
+        }
+    }
+
+}

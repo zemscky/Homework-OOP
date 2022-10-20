@@ -8,14 +8,10 @@ public class Main {
         Human artem = new Human(27, "Артем", "Москва", "Директора по развитию бизнеса");
         Human vladimir = new Human(21,"Владимир", "Казань", null);
 
-        printInfo(maksim);
-        printInfo(anna);
-        printInfo(katia);
-        printInfo(artem);
-        printInfo(vladimir);
-    }
-    public static void printInfo (Human human) {
-        System.out.println("Привет! Меня зовут "+ human.name + ". Я из города "+ human.getTown() +
-                ". Мне "+ human.getYearOfBirth() + " лет. Я работаю на должности "+ human.job + ". Будем знакомы!");
+        System.out.println(maksim);
+        System.out.println(anna);
+        System.out.println(katia);
+        System.out.println(artem);
+        System.out.println(vladimir);
     }
 }

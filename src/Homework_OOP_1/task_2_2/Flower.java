@@ -1,69 +1,29 @@
 package Homework_OOP_1.task_2_2;
 
 public class Flower {
-    private String flowerColor; // цвет цветка
+    private String title; // цвет цветка
     private String country; // страна происхождения
-    private double cost; // стоимость
-    int lifeSpan; // срок стояния, указанный в целых днях
+    private float cost; // стоимость
+    private int lifeSpan; // срок стояния, указанный в целых днях
 
-    public Flower(String flowerColor, String country, double cost, int lifeSpan) {
-        if (flowerColor != null && !flowerColor.isEmpty() && !flowerColor.isBlank()) {
-            this.flowerColor = flowerColor;
-        } else {
-            this.flowerColor = "Белый";
-        }
+    public Flower(
+            String title,
+            String country,
+            float cost,
+            int lifeSpan) {
 
-        if (country != null && !country.isEmpty() && !country.isBlank()) {
-            this.country = country;
-        } else {
-            this.country = "Россия";
-        }
-
-        if (cost <= 0) {
-            this.cost = 0;
-        } else {
-            this.cost = cost;
-        }
-        if (lifeSpan <= 0) {
-            this.lifeSpan = 3;
-        } else {
-            this.lifeSpan = lifeSpan;
-        }
-    }
-    public Flower(String flowerColor, String country, double cost) {
-
-        this(flowerColor, country, cost , 3);
-
-        if (flowerColor != null && !flowerColor.isEmpty() && !flowerColor.isBlank()) {
-            this.flowerColor = flowerColor;
-        } else {
-            this.flowerColor = "Белый";
-        }
-
-        if (country != null && !country.isEmpty() && !country.isBlank()) {
-            this.country = country;
-        } else {
-            this.country = "Россия";
-        }
-
-        if (cost <= 0) {
-            this.cost = 0;
-        } else {
-            this.cost = cost;
-        }
+        setTitle(title);
+        setCountry(country);
+        setCost(cost);
+        setLifeSpan(lifeSpan);
     }
 
-
-    public String getFlowerColor() {
-        return flowerColor;
+    public String getTitle() {
+        return title;
     }
 
-    public void setFlowerColor(String flowerColor) {
-        if (flowerColor != null && !flowerColor.isEmpty() && !flowerColor.isBlank()) {
-            this.flowerColor = flowerColor;
-        } else {
-            this.flowerColor = "Белый";
-        }
+    public void setTitle(String title) {
+        this.title = ValidationUtils.validOrDefault(title, "rose");
     }
 
     public String getCountry() {
@@ -71,22 +31,31 @@ public class Flower {
     }
 
     public void setCountry(String country) {
-        if (country != null && !country.isEmpty() && !country.isBlank()) {
-            this.country = country;
-        } else {
-            this.country = "Россия";
-        }
+        this.country = ValidationUtils.validOrDefault(country, "Russia");
     }
 
-    public double getCost() {
+    public float getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
-        if (cost <= 0) {
-            this.cost = 0;
-        } else {
-            this.cost = cost;
-        }
+    public void setCost(float cost) {
+        this.cost = Math.max(cost, 1);
+    }
+
+    public int getLifeSpan() {
+        return lifeSpan;
+    }
+
+    public void setLifeSpan(int lifeSpan) {
+        this.lifeSpan = lifeSpan > 0 ? lifeSpan : 3;
+    }
+
+    @Override
+    public String toString() {
+        return "Цветок: " +
+                "название - " + title +
+                ", страна - " + country +
+                ", стоимость - " + cost +
+                ", срок стояния - " + lifeSpan;
     }
 }

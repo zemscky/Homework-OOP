@@ -5,35 +5,38 @@ import java.util.Objects;
 
 
 public class Human {
+    private static final String DEFAULT_STRING_VALUE = "Информация не указана";
     private int yearOfBirth;
-    public String name;
+    private String name;
     private String town;
-    public String job;
+    private String job;
 
-    public Human(int yearOfBirth, String name, String town, String job) {
-        if (yearOfBirth < 0 || town.isEmpty() || town.isBlank()) {
-            this.yearOfBirth = 0;
-        } else {
-            this.yearOfBirth = yearOfBirth;
-        }
-        this.name = Objects.requireNonNullElse(name, "Информация не указана");
-        if (town != null && !town.isEmpty() && !town.isBlank()) {
-            this.town = town;
-        }else {
-            this.town = "Информация не указана";
-        }
-        this.job = Objects.requireNonNullElse(job, "Информация не указана");
+    public Human(
+            int yearOfBirth,
+            String name,
+            String town,
+            String job) {
+
+        setName(name);
+        setTown(town);
+        setYearOfBirth(yearOfBirth);
+        setJob(job);
     }
 
     public int getYearOfBirth() {
         return yearOfBirth;
     }
+
     public void setYearOfBirth(int yearOfBirth) {
-        if (yearOfBirth < 0) {
-            this.yearOfBirth = 0;
-        } else {
-            this.yearOfBirth = yearOfBirth;
-        }
+        this.yearOfBirth = Math.max(yearOfBirth, 0);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = ValidationUtils.validOrDefault(name,DEFAULT_STRING_VALUE);
     }
 
     public String getTown() {
@@ -41,12 +44,29 @@ public class Human {
     }
 
     public void setTown(String town) {
-        if (town != null && !town.isEmpty() && !town.isBlank()) {
-            this.town = town;
-        }else {
-            this.town = "Информация не указана";
-        }
+        this.town = ValidationUtils.validOrDefault(town,DEFAULT_STRING_VALUE);
     }
 
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = ValidationUtils.validOrDefault(job,DEFAULT_STRING_VALUE);
+    }
+
+    private  int getAgeInYears() { // Расчет возраста
+        int currentYear = LocalDate.now().getYear();
+        return currentYear - yearOfBirth;
+    }
+
+    @Override
+    public String toString() {
+        return "Привет! Меня зовут "+ name +
+                ". Я из города "+ town +
+                ". Мне " + getAgeInYears() +
+                " лет. Я работаю на должности "+ job +
+                ". Будем знакомы!";
+    }
 
 }

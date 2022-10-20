@@ -51,11 +51,11 @@ public class Main {
                 "Южная Корея"
         );
 
-       printInfo(lada);
-       printInfo(audi);
-       printInfo(bMW);
-       printInfo(kia);
-       printInfo(hyundai);
+        printInfo(lada);
+        printInfo(audi);
+        printInfo(bMW);
+        printInfo(kia);
+        printInfo(hyundai);
     }
 
     private static void printInfo(Car car) {
